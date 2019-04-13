@@ -1,5 +1,19 @@
 {
   "name": "fassjs-utils",
-  "version": "0.0.0",
-  "license": "MIT"
+  "version": "0.0.0-alpha.0",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "lint": "tslint -p tsconfig.json --fix",
+    "build": "tsc",
+    "test": "jest --config jestconfig.json"
+  },
+  "devDependencies": {
+    "typescript": "*",
+    "tslint": "*",
+    "jest": "*",
+    "ts-jest": "*",
+    "@types/jest": "*"
+  }
 }
