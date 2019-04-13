@@ -8,7 +8,8 @@
     "lint": "tslint -p tsconfig.json --fix",
     "build": "tsc",
     "test": "jest --config jestconfig.json --expand",
-    "prepare": "yarn test && yarn lint && yarn build && yarn pack && tar zxvf *.tgz"
+    "check": "yarn test && yarn lint && yarn build && yarn pack && tar zxvf *.tgz",
+    "doc": "jsdoc2md --files ./src/*.ts --configure ./jsdoc2md.json > ./API.md"
   },
   "dependencies": {
     "winston": "*"
@@ -17,12 +18,15 @@
     "@babel/core": "*",
     "@babel/preset-env": "*",
     "@babel/preset-typescript": "*",
-    "@types/node": "*",
-    "@types/jest": "*",
+    "@babel/plugin-proposal-class-properties": "*",
     "@types/debug": "*",
-    "typescript": "*",
-    "tslint": "*",
+    "@types/jest": "*",
+    "@types/node": "*",
+    "babel-jest": "*",
     "jest": "*",
-    "babel-jest": "*"
+    "jsdoc-babel": "*",
+    "jsdoc-to-markdown": "*",
+    "tslint": "*",
+    "typescript": "*"
   }
 }

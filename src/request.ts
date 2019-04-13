@@ -1,3 +1,8 @@
+/**
+ * 网络请求
+ * @module request
+ */
+
 import * as http from 'http';
 import * as https from 'https';
 import { stringify } from 'querystring';
@@ -16,14 +21,14 @@ interface IOptions {
 }
 
 /**
- * 发起网络请求
+ * @alias module:request
  *
  * @param {string} url 请求路径或完整网址
- * @param {object} options 参数和配置
- * @param {string} options.method Method，支持 GET、POST、PUT、DELETE，默认为 GET
- * @param {query} options.query Query
- * @param {object} options.headers Header
- * @param {object} options.body Body
+ * @param {object=} [options={}] 参数和配置
+ * @param {string} [options.methd=GET] 请求方法
+ * @param {object} [options.query={}] 请求参数，放置于 path 后，若需放置在 body 中，请使用 body 参数
+ * @param {object} [options.headers={}] 请求头
+ * @param {object=} options.body 请求体
  *
  * @returns {promise}
  */
