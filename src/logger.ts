@@ -1,8 +1,3 @@
-/**
- * 日志模块
- * @module logger
- */
-
 import { createLogger, format, Logger, transports } from 'winston';
 
 enum ILevel {
@@ -19,7 +14,7 @@ interface ITimer {
 
 /**
  * 日志类
- * @class Log
+ * @memberof Utils
  */
 class Log {
   public readonly label: string;

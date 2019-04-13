@@ -1,8 +1,3 @@
-/**
- * 网络请求
- * @module request
- */
-
 import * as http from 'http';
 import * as https from 'https';
 import { stringify } from 'querystring';
@@ -21,7 +16,8 @@ interface IOptions {
 }
 
 /**
- * @alias module:request
+ * 发起网络请求
+ * @memberof Utils
  *
  * @param {string} url 请求路径或完整网址
  * @param {object=} [options={}] 参数和配置

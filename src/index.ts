@@ -1,6 +1,6 @@
 /**
  * FassJs 通用工具
- * @module Utils
+ * @namespace Utils
  */
 
 import logger from './logger';
