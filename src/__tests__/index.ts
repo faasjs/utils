@@ -1,5 +1,6 @@
 import Utils from '../index';
 
 test('Utils', () => {
-  expect(Utils).toEqual({});
+  expect(Utils).toHaveProperty('logger');
+  expect(Utils).toHaveProperty('request');
 });

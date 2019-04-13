@@ -7,13 +7,22 @@
   "scripts": {
     "lint": "tslint -p tsconfig.json --fix",
     "build": "tsc",
-    "test": "jest --config jestconfig.json"
+    "test": "jest --config jestconfig.json --expand",
+    "prepare": "yarn test && yarn lint && yarn build && yarn pack && tar zxvf *.tgz"
+  },
+  "dependencies": {
+    "winston": "*"
   },
   "devDependencies": {
+    "@babel/core": "*",
+    "@babel/preset-env": "*",
+    "@babel/preset-typescript": "*",
+    "@types/node": "*",
+    "@types/jest": "*",
+    "@types/debug": "*",
     "typescript": "*",
     "tslint": "*",
     "jest": "*",
-    "ts-jest": "*",
-    "@types/jest": "*"
+    "babel-jest": "*"
   }
 }

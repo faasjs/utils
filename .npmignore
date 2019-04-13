@@ -1,5 +1,10 @@
 src
+jestconfig.json
 tsconfig.json
 tslint.json
 .gitignore
+.babelrc.js
+*.log
 __tests__
+package
+*.tgz
