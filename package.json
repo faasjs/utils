@@ -1,5 +1,5 @@
 {
-  "name": "@fassjs/utils",
+  "name": "@faasjs/utils",
   "version": "0.0.0-alpha.0",
   "license": "MIT",
   "main": "lib/index.js",
@@ -8,17 +8,17 @@
     "lint": "tslint -p tsconfig.json --fix",
     "build": "tsc",
     "test": "jest --expand",
-    "ci": "yarn test && yarn lint && yarn build",
-    "doc": "jsdoc2md --files ./src/*.ts --configure ./jsdoc2md.json > ./API.md"
+    "doc": "jsdoc2md --files ./src/*.ts --configure ./jsdoc2md.json > ./API.md",
+    "ci": "yarn test && yarn lint && yarn build && yarn doc"
   },
   "dependencies": {
     "winston": "*"
   },
   "devDependencies": {
     "@babel/core": "*",
+    "@babel/plugin-proposal-class-properties": "*",
     "@babel/preset-env": "*",
     "@babel/preset-typescript": "*",
-    "@babel/plugin-proposal-class-properties": "*",
     "@types/debug": "*",
     "@types/jest": "*",
     "@types/node": "*",

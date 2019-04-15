@@ -14,7 +14,6 @@ interface ITimer {
 
 /**
  * 日志类
- * @memberof Utils
  */
 class Log {
   public readonly label: string;

@@ -8,8 +8,6 @@ const log = new Logger('fassjs.utils.request');
 
 /**
  * 发起网络请求
- * @memberof Utils
- *
  * @param {string} url 请求路径或完整网址
  * @param {object=} [options={}] 参数和配置
  * @param {string} [options.methd=GET] 请求方法

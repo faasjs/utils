@@ -1,40 +1,36 @@
-<a name="Utils"></a>
+## Classes
 
-## Utils : <code>object</code>
-<p>FassJs 通用工具</p>
+<dl>
+<dt><a href="#Log">Log</a></dt>
+<dd><p>日志类</p></dd>
+</dl>
 
-**Kind**: global namespace  
+## Functions
 
-* [Utils](#Utils) : <code>object</code>
-    * [.Log](#Utils.Log)
-        * [new Log(label)](#new_Utils.Log_new)
-        * [.debug(message, [...args])](#Utils.Log+debug)
-        * [.info(message, [...args])](#Utils.Log+info)
-        * [.warn(message, [...args])](#Utils.Log+warn)
-        * [.error(message, [...args])](#Utils.Log+error)
-        * [.time(key, level)](#Utils.Log+time)
-        * [.timeEnd(key, message, [...args])](#Utils.Log+timeEnd)
-    * [.request(url, [options])](#Utils.request) ⇒ <code>promise</code>
+<dl>
+<dt><a href="#request">request(url, [options])</a> ⇒ <code>promise</code></dt>
+<dd><p>发起网络请求</p></dd>
+</dl>
 
-<a name="Utils.Log"></a>
+<a name="Log"></a>
 
-### Utils.Log
+## Log
 <p>日志类</p>
 
-**Kind**: static class of [<code>Utils</code>](#Utils)  
+**Kind**: global class  
 
-* [.Log](#Utils.Log)
-    * [new Log(label)](#new_Utils.Log_new)
-    * [.debug(message, [...args])](#Utils.Log+debug)
-    * [.info(message, [...args])](#Utils.Log+info)
-    * [.warn(message, [...args])](#Utils.Log+warn)
-    * [.error(message, [...args])](#Utils.Log+error)
-    * [.time(key, level)](#Utils.Log+time)
-    * [.timeEnd(key, message, [...args])](#Utils.Log+timeEnd)
+* [Log](#Log)
+    * [new Log(label)](#new_Log_new)
+    * [.debug(message, [...args])](#Log+debug)
+    * [.info(message, [...args])](#Log+info)
+    * [.warn(message, [...args])](#Log+warn)
+    * [.error(message, [...args])](#Log+error)
+    * [.time(key, level)](#Log+time)
+    * [.timeEnd(key, message, [...args])](#Log+timeEnd)
 
-<a name="new_Utils.Log_new"></a>
+<a name="new_Log_new"></a>
 
-#### new Log(label)
+### new Log(label)
 <p>初始化日志</p>
 
 
@@ -42,72 +38,72 @@
 | --- | --- | --- |
 | label | <code>string</code> | <p>日志前缀</p> |
 
-<a name="Utils.Log+debug"></a>
+<a name="Log+debug"></a>
 
-#### log.debug(message, [...args])
+### log.debug(message, [...args])
 <p>调试级别日志</p>
 
-**Kind**: instance method of [<code>Log</code>](#Utils.Log)  
+**Kind**: instance method of [<code>Log</code>](#Log)  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | message | <code>string</code> | <p>日志内容</p> |
 | [...args] | <code>any</code> | <p>内容参数</p> |
 
-<a name="Utils.Log+info"></a>
+<a name="Log+info"></a>
 
-#### log.info(message, [...args])
+### log.info(message, [...args])
 <p>信息级别日志</p>
 
-**Kind**: instance method of [<code>Log</code>](#Utils.Log)  
+**Kind**: instance method of [<code>Log</code>](#Log)  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | message | <code>string</code> | <p>日志内容</p> |
 | [...args] | <code>any</code> | <p>内容参数</p> |
 
-<a name="Utils.Log+warn"></a>
+<a name="Log+warn"></a>
 
-#### log.warn(message, [...args])
+### log.warn(message, [...args])
 <p>警告级别日志</p>
 
-**Kind**: instance method of [<code>Log</code>](#Utils.Log)  
+**Kind**: instance method of [<code>Log</code>](#Log)  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | message | <code>string</code> | <p>日志内容</p> |
 | [...args] | <code>any</code> | <p>内容参数</p> |
 
-<a name="Utils.Log+error"></a>
+<a name="Log+error"></a>
 
-#### log.error(message, [...args])
+### log.error(message, [...args])
 <p>错误级别日志</p>
 
-**Kind**: instance method of [<code>Log</code>](#Utils.Log)  
+**Kind**: instance method of [<code>Log</code>](#Log)  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| message | <code>string</code> | <p>日志内容</p> |
+| message | <code>any</code> | <p>日志内容，可以为 Error 对象</p> |
 | [...args] | <code>any</code> | <p>内容参数</p> |
 
-<a name="Utils.Log+time"></a>
+<a name="Log+time"></a>
 
-#### log.time(key, level)
+### log.time(key, level)
 <p>设置一个计时器</p>
 
-**Kind**: instance method of [<code>Log</code>](#Utils.Log)  
+**Kind**: instance method of [<code>Log</code>](#Log)  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | key | <code>string</code> | <p>计时器标识</p> |
 | level |  | <p>[string=debug] 日志级别，支持 debug、info、warn、error</p> |
 
-<a name="Utils.Log+timeEnd"></a>
+<a name="Log+timeEnd"></a>
 
-#### log.timeEnd(key, message, [...args])
+### log.timeEnd(key, message, [...args])
 <p>结束计时并显示日志</p>
 
-**Kind**: instance method of [<code>Log</code>](#Utils.Log)  
+**Kind**: instance method of [<code>Log</code>](#Log)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -115,12 +111,12 @@
 | message | <code>string</code> | <p>日志内容</p> |
 | [...args] | <code>any</code> | <p>内容参数</p> |
 
-<a name="Utils.request"></a>
+<a name="request"></a>
 
-### Utils.request(url, [options]) ⇒ <code>promise</code>
+## request(url, [options]) ⇒ <code>promise</code>
 <p>发起网络请求</p>
 
-**Kind**: static method of [<code>Utils</code>](#Utils)  
+**Kind**: global function  
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
