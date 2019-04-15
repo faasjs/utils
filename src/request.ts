@@ -4,7 +4,7 @@ import { stringify } from 'querystring';
 import * as URL from 'url';
 import Logger from './logger';
 
-const log = new Logger('fassjs.utils.request');
+const log = new Logger('faasjs.utils.request');
 
 /**
  * 发起网络请求
