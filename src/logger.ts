@@ -28,8 +28,12 @@ class Log {
   constructor(label: string) {
     this.label = label;
     this.logger = createLogger({
-      format: format.combine(format.label({ label, message: true }), format.colorize({ all: true }), format.splat(),
-        format.simple()),
+      format: format.combine(
+        format.label({ label, message: true }),
+        format.cli({ all: true }),
+        format.splat(),
+        format.simple(),
+      ),
       level: process.env.logLevel || 'debug',
       transports: [new transports.Console()],
     });
@@ -78,11 +82,17 @@ class Log {
 
   /**
    * 错误级别日志
-   * @param message {string} 日志内容
+   * @param message {any} 日志内容，可以为 Error 对象
    * @param args {...any=} 内容参数
    */
-  public error(message: string, ...args: any[]) {
+  public error(message: any, ...args: any[]) {
+    [message].concat(Array.from(args)).forEach((e: any) => {
+      if (e.stack) {
+        this.logger.log('error', e.stack);
+      }
+    });
     this.logger.log('error', message, ...args);
+
     return this;
   }
 

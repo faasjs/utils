@@ -1,6 +1,6 @@
-import Utils from '../index';
+import * as Utils from '../index';
 
 test('Utils', () => {
-  expect(Utils).toHaveProperty('logger');
+  expect(Utils).toHaveProperty('Logger');
   expect(Utils).toHaveProperty('request');
 });

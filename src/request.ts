@@ -6,15 +6,6 @@ import Logger from './logger';
 
 const log = new Logger('fassjs.utils.request');
 
-interface IOptions {
-  method: string;
-  headers: any;
-  query: any;
-  body?: any;
-  host?: string;
-  path?: string;
-}
-
 /**
  * 发起网络请求
  * @memberof Utils
@@ -28,55 +19,72 @@ interface IOptions {
  *
  * @returns {promise}
  */
-export default function request(url: string, options: IOptions = {
-  headers: {},
-  method: 'GET',
-  query: {},
-}): Promise<any> {
-  log.debug('request %s %o', url, options);
+export default function request(url: string, {
+  headers,
+  method,
+  query,
+  body,
+}: {
+  headers?: http.OutgoingHttpHeaders,
+  method?: string,
+  query?: http.OutgoingHttpHeaders,
+  body?: http.OutgoingHttpHeaders | string,
+} = {
+    headers: {},
+    query: {},
+  }): Promise<any> {
+  log.debug('request %s %o', url, {
+    body, headers, method, query,
+  });
+
+  // 序列化 query
+  if (query) {
+    if (url.indexOf('?') < 0) {
+      url += '?';
+    } else if (url.substring(url.length - 1) !== '?') {
+      url += '&';
+    }
+    url += stringify(query);
+  }
+
+  // 处理 URL 并生成 options
+  const uri = URL.parse(url);
+  const protocol = uri.protocol === 'https:' ? https : http;
+
+  const options: {
+    method: string,
+    headers: http.OutgoingHttpHeaders,
+    query: http.OutgoingHttpHeaders,
+    host: string,
+    path: string,
+  } = {
+    headers: {},
+    host: uri.host!,
+    method: method ? method.toUpperCase() : 'GET',
+    path: uri.path!,
+    query: {},
+  };
+
+  // 处理 headers
+  for (const key in headers) {
+    if (typeof headers[key] !== 'undefined' && headers[key] !== null) {
+      options.headers[key] = headers[key];
+    }
+  }
+
+  // 序列化 body
+  if (body && typeof body !== 'string') {
+    if (
+      options.headers['Content-Type'] &&
+      options.headers['Content-Type']!.toString().includes('application/x-www-form-urlencoded')
+    ) {
+      body = stringify(body);
+    } else {
+      body = JSON.stringify(body);
+    }
+  }
 
   return new Promise((resolve, reject) => {
-    options.method = options.method.toUpperCase();
-
-    // 序列化 query
-    if (options.query) {
-      if (url.indexOf('?') < 0) {
-        url += '?';
-      } else if (url.substring(url.length - 1) !== '?') {
-        url += '&';
-      }
-      url += stringify(options.query);
-      delete options.query;
-    }
-
-    // 序列化 body
-    let body = options.body;
-    if (options.body && typeof options.body !== 'string') {
-      if (options.headers && options.headers['Content-Type'] === 'application/x-www-form-urlencoded') {
-        body = stringify(options.body);
-      } else if (typeof body !== 'string') {
-        body = JSON.stringify(options.body);
-      }
-    }
-    delete options.body;
-
-    // 处理 URL
-    const uri = URL.parse(url);
-    const protocol = uri.protocol === 'https:' ? https : http;
-    if (!options.host) {
-      options.host = uri.host;
-    }
-    if (!options.path) {
-      options.path = uri.path;
-    }
-
-    // 处理 headers
-    for (const key in options.headers) {
-      if (typeof options.headers[key] === 'undefined') {
-        delete options.headers[key];
-      }
-    }
-
     // 包裹请求
     const req = protocol.request(options, (res) => {
       const raw: Buffer[] = [];
@@ -111,10 +119,11 @@ export default function request(url: string, options: IOptions = {
     }
 
     req.on('error', (e) => {
-      log.error('fassjs.utils.request.response.error', e);
+      log.error('response.error', e);
       reject(e);
     });
 
+    // 发送请求
     log.time(url);
     req.end();
   });

@@ -1,6 +1,6 @@
 import request from '../request';
 
-test('Request', async () => {
+test('200', async () => {
   const res = await request('http://baidu.com');
 
   expect(res.statusCode).toEqual(200);

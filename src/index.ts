@@ -3,10 +3,10 @@
  * @namespace Utils
  */
 
-import logger from './logger';
+import Logger from './logger';
 import request from './request';
 
-export default {
-  logger,
+export {
+  Logger,
   request,
 };

@@ -1,5 +1,5 @@
 {
-  "name": "fassjs-utils",
+  "name": "@fassjs/utils",
   "version": "0.0.0-alpha.0",
   "license": "MIT",
   "main": "lib/index.js",
@@ -7,8 +7,8 @@
   "scripts": {
     "lint": "tslint -p tsconfig.json --fix",
     "build": "tsc",
-    "test": "jest --config jestconfig.json --expand",
-    "check": "yarn test && yarn lint && yarn build && yarn pack && tar zxvf *.tgz",
+    "test": "jest --expand",
+    "ci": "yarn test && yarn lint && yarn build",
     "doc": "jsdoc2md --files ./src/*.ts --configure ./jsdoc2md.json > ./API.md"
   },
   "dependencies": {
@@ -28,5 +28,10 @@
     "jsdoc-to-markdown": "*",
     "tslint": "*",
     "typescript": "*"
+  },
+  "jest": {
+    "testPathIgnorePatterns": [
+      "/lib/"
+    ]
   }
 }
