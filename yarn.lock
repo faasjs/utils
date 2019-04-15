@@ -4835,7 +4835,7 @@ wide-align@^1.1.0:
   dependencies:
     string-width "^1.0.2 || 2"
 
-winston-transport@^4.3.0:
+winston-transport@*, winston-transport@^4.3.0:
   version "4.3.0"
   resolved "http://registry.npm.taobao.org/winston-transport/download/winston-transport-4.3.0.tgz#df68c0c202482c448d9b47313c07304c2d7c2c66"
   integrity sha1-32jAwgJILESNm0cxPAcwTC18LGY=

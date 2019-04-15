@@ -16,23 +16,36 @@ interface ITimer {
  * 日志类
  */
 class Log {
-  public readonly label: string;
-  public readonly logger: Logger;
+  private label?: string;
+  private logger: Logger;
   private cachedTimers: any;
+  private addedTranspot: any[];
 
   /**
    * 初始化日志
    * @param label {string} 日志前缀
    */
-  constructor(label: string) {
-    this.label = label;
-    this.logger = createLogger({
-      format: format.combine(
+  constructor(label?: string) {
+    if (label) {
+      this.label = label;
+    }
+    let formats;
+    if (label) {
+      formats = format.combine(
         format.label({ label, message: true }),
         format.cli({ all: true }),
         format.splat(),
         format.simple(),
-      ),
+      );
+    } else {
+      formats = format.combine(
+        format.cli({ all: true }),
+        format.splat(),
+        format.simple(),
+      );
+    }
+    this.logger = createLogger({
+      format: formats,
       level: process.env.logLevel || 'debug',
       transports: [new transports.Console()],
     });
@@ -47,6 +60,32 @@ class Log {
     }
 
     this.cachedTimers = {};
+    this.addedTranspot = [];
+  }
+
+  /**
+   * 设置日志前缀
+   * @param label {string} 日志前缀
+   */
+  public setLabel(label: string) {
+    this.label = label;
+    this.logger.format = format.combine(
+      format.label({ label, message: true }),
+      format.cli({ all: true }),
+      format.splat(),
+      format.simple(),
+    );
+    return this;
+  }
+
+  /**
+   * 添加 Transport
+   * @param transport {Transport}
+   */
+  public addTransport(transport: any) {
+    this.addedTranspot.push(transport);
+    this.logger.add(transport);
+    return this;
   }
 
   /**
