@@ -9,8 +9,11 @@
     "build": "tsc",
     "test": "jest --expand",
     "doc": "jsdoc2md --files ./src/*.ts --configure ./jsdoc2md.json > ./API.md",
-    "ci": "yarn test && yarn lint && yarn build && yarn doc"
+    "ci": "yarn test && yarn lint && rm -rf ./lib && yarn build && yarn doc"
   },
+  "files": [
+    "lib"
+  ],
   "devDependencies": {
     "@babel/core": "*",
     "@babel/plugin-proposal-class-properties": "*",
