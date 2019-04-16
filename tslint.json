@@ -12,7 +12,8 @@
     "no-empty": [
       true,
       "allow-empty-functions"
-    ]
+    ],
+    "no-console": false
   },
   "rulesDirectory": []
 }

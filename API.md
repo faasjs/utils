@@ -21,8 +21,6 @@
 
 * [Log](#Log)
     * [new Log(label)](#new_Log_new)
-    * [.setLabel(label)](#Log+setLabel)
-    * [.addTransport(transport)](#Log+addTransport)
     * [.debug(message, [...args])](#Log+debug)
     * [.info(message, [...args])](#Log+info)
     * [.warn(message, [...args])](#Log+warn)
@@ -39,28 +37,6 @@
 | Param | Type | Description |
 | --- | --- | --- |
 | label | <code>string</code> | <p>日志前缀</p> |
-
-<a name="Log+setLabel"></a>
-
-### log.setLabel(label)
-<p>设置日志前缀</p>
-
-**Kind**: instance method of [<code>Log</code>](#Log)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| label | <code>string</code> | <p>日志前缀</p> |
-
-<a name="Log+addTransport"></a>
-
-### log.addTransport(transport)
-<p>添加 Transport</p>
-
-**Kind**: instance method of [<code>Log</code>](#Log)  
-
-| Param | Type |
-| --- | --- |
-| transport | <code>Transport</code> | 
 
 <a name="Log+debug"></a>
 
