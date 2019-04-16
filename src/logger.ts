@@ -1,10 +1,17 @@
-import { createLogger, format, Logger, transports } from 'winston';
+import { format } from 'util';
 
 enum ILevel {
   debug = 'debug',
   info = 'info',
   warn = 'warn',
   error = 'error',
+}
+
+enum ILevelColor {
+  debug = 34,
+  info = 32,
+  warn = 33,
+  error = 31,
 }
 
 interface ITimer {
@@ -16,10 +23,9 @@ interface ITimer {
  * 日志类
  */
 class Log {
-  private label?: string;
-  private logger: Logger;
+  public silent: boolean;
+  public label?: string;
   private cachedTimers: any;
-  private addedTranspot: any[];
 
   /**
    * 初始化日志
@@ -29,63 +35,13 @@ class Log {
     if (label) {
       this.label = label;
     }
-    let formats;
-    if (label) {
-      formats = format.combine(
-        format.label({ label, message: true }),
-        format.cli({ all: true }),
-        format.splat(),
-        format.simple(),
-      );
-    } else {
-      formats = format.combine(
-        format.cli({ all: true }),
-        format.splat(),
-        format.simple(),
-      );
-    }
-    this.logger = createLogger({
-      format: formats,
-      level: process.env.logLevel || 'debug',
-      transports: [new transports.Console()],
-    });
 
     // 当使用 Jest 进行测试且使用 --silent 参数时禁止日志输出
-    if (
-      !process.env.logLevel &&
+    this.silent = !process.env.logLevel &&
       process.env.npm_config_argv &&
-      JSON.parse(process.env.npm_config_argv).original.includes('--silent')
-    ) {
-      this.logger.silent = true;
-    }
+      JSON.parse(process.env.npm_config_argv).original.includes('--silent');
 
     this.cachedTimers = {};
-    this.addedTranspot = [];
-  }
-
-  /**
-   * 设置日志前缀
-   * @param label {string} 日志前缀
-   */
-  public setLabel(label: string) {
-    this.label = label;
-    this.logger.format = format.combine(
-      format.label({ label, message: true }),
-      format.cli({ all: true }),
-      format.splat(),
-      format.simple(),
-    );
-    return this;
-  }
-
-  /**
-   * 添加 Transport
-   * @param transport {Transport}
-   */
-  public addTransport(transport: any) {
-    this.addedTranspot.push(transport);
-    this.logger.add(transport);
-    return this;
   }
 
   /**
@@ -94,7 +50,7 @@ class Log {
    * @param args {...any=} 内容参数
    */
   public debug(message: string, ...args: any[]) {
-    this.logger.log('debug', message, ...args);
+    this.log(ILevel.debug, message, ...args);
     return this;
   }
 
@@ -104,7 +60,7 @@ class Log {
    * @param args {...any=} 内容参数
    */
   public info(message: string, ...args: any[]) {
-    this.logger.log('info', message, ...args);
+    this.log(ILevel.info, message, ...args);
     return this;
   }
 
@@ -114,7 +70,7 @@ class Log {
    * @param args {...any=} 内容参数
    */
   public warn(message: string, ...args: any[]) {
-    this.logger.log('warn', message, ...args);
+    this.log(ILevel.warn, message, ...args);
     return this;
   }
 
@@ -126,10 +82,10 @@ class Log {
   public error(message: any, ...args: any[]) {
     [message].concat(Array.from(args)).forEach((e: any) => {
       if (e.stack) {
-        this.logger.log('error', e.stack);
+        this.log(ILevel.error, e.stack);
       }
     });
-    this.logger.log('error', message, ...args);
+    this.log(ILevel.error, message, ...args);
 
     return this;
   }
@@ -169,6 +125,20 @@ class Log {
       this.error(message, ...args);
     }
     return this;
+  }
+
+  private log(level: ILevel, message: string, ...args: any) {
+    if (this.label) {
+      message = `[${this.label}] ${message}`;
+    }
+    let output = format(message, ...args);
+    output = `\u001b[0${ILevelColor[level]}m${level.toUpperCase()} ${output}\u001b[39m`;
+
+    if (level === ILevel.error) {
+      console.error(output);
+    } else {
+      console.log(output);
+    }
   }
 }
 

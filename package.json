@@ -11,10 +11,6 @@
     "doc": "jsdoc2md --files ./src/*.ts --configure ./jsdoc2md.json > ./API.md",
     "ci": "yarn test && yarn lint && yarn build && yarn doc"
   },
-  "dependencies": {
-    "winston": "*",
-    "winston-transport": "*"
-  },
   "devDependencies": {
     "@babel/core": "*",
     "@babel/plugin-proposal-class-properties": "*",
