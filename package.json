@@ -9,7 +9,8 @@
     "build": "tsc",
     "test": "jest --expand",
     "doc": "jsdoc2md --files ./lib/*.js > ./API.md",
-    "ci": "yarn test && yarn lint && rm -rf ./lib && yarn build && yarn doc"
+    "ci": "yarn lint && yarn test",
+    "commit": "yarn ci && rm -rf ./lib && yarn build && yarn doc"
   },
   "files": [
     "lib"
