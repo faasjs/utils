@@ -30,6 +30,7 @@
     "typescript": "*"
   },
   "jest": {
+    "collectCoverage": true,
     "testPathIgnorePatterns": [
       "/lib/"
     ]
