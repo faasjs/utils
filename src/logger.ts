@@ -80,12 +80,17 @@ class Log {
    * @param args {...any=} 内容参数
    */
   public error(message: any, ...args: any[]) {
+    let stack = false;
     [message].concat(Array.from(args)).forEach((e: any) => {
       if (e.stack) {
+        stack = true;
         this.log(ILevel.error, e.stack);
       }
     });
-    this.log(ILevel.error, message, ...args);
+
+    if (!stack) {
+      this.log(ILevel.error, message, ...args);
+    }
 
     return this;
   }
