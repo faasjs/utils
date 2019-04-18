@@ -25,6 +25,7 @@ interface ITimer {
 class Log {
   public silent: boolean;
   public label?: string;
+  public lastOutput?: string;
   private cachedTimers: any;
 
   /**
@@ -138,6 +139,8 @@ class Log {
     }
     let output = format(message, ...args);
     output = `\u001b[0${ILevelColor[level]}m${level.toUpperCase()} ${output}\u001b[39m`;
+
+    this.lastOutput = output;
 
     if (level === ILevel.error) {
       console.error(output);

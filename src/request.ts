@@ -94,6 +94,8 @@ export default function request(url: string, {
         log.timeEnd(url, 'response %s %s %s', res.statusCode, res.headers['content-type'], data);
 
         const response = Object.create(null);
+        response.request = options;
+        response.request.body = body;
         response.statusCode = res.statusCode;
         response.headers = res.headers;
         response.body = data;

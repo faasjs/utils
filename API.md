@@ -9,6 +9,9 @@
 ## Functions
 
 <dl>
+<dt><a href="#deepMerge">deepMerge(...sources)</a></dt>
+<dd><p>合并 Object，若有数组形式的属性，也被自动合并</p>
+</dd>
 <dt><a href="#request">request(url, [options])</a> ⇒ <code>promise</code></dt>
 <dd><p>发起网络请求</p>
 </dd>
@@ -112,6 +115,17 @@
 | key | <code>string</code> | 计时器标识 |
 | message | <code>string</code> | 日志内容 |
 | [...args] | <code>any</code> | 内容参数 |
+
+<a name="deepMerge"></a>
+
+## deepMerge(...sources)
+合并 Object，若有数组形式的属性，也被自动合并
+
+**Kind**: global function  
+
+| Param | Description |
+| --- | --- |
+| ...sources | [...any] 合并对象 |
 
 <a name="request"></a>
 

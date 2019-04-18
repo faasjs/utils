@@ -1,6 +1,6 @@
 {
   "name": "@faasjs/utils",
-  "version": "0.0.0-alpha.0",
+  "version": "0.0.0-alpha.1",
   "license": "MIT",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -33,6 +33,11 @@
     "collectCoverage": true,
     "testPathIgnorePatterns": [
       "/lib/"
+    ],
+    "coveragePathIgnorePatterns": [
+      "/lib/",
+      "/tmp/",
+      "/__tests__/"
     ]
   }
 }

@@ -13,7 +13,14 @@
       true,
       "allow-empty-functions"
     ],
-    "no-console": false
+    "no-console": false,
+    "only-arrow-functions": false,
+    "space-before-function-paren": [
+      true,
+      {
+        "anonymous": "always"
+      }
+    ]
   },
   "rulesDirectory": []
 }
