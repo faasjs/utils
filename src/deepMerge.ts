@@ -1,5 +1,15 @@
+const shouldMerge = function (item: any) {
+  const type = Object.prototype.toString.call(item);
+  return type === '[object Object]' || type === '[object Array]';
+};
+
 /**
- * 合并 Object，若有数组形式的属性，也被自动合并
+ * 合并对象
+ * @description
+ * 注意事项：
+ * * 合并时会复制对象，不会修改原对象
+ * * 合并顺序是后面的覆盖前面的
+ * * 若有数组形式的属性，数组里的内容将被去重合并
  * @param sources [...any] 合并对象
  */
 export default function deepMerge<T extends object = object>(...sources: T[]) {
@@ -9,10 +19,10 @@ export default function deepMerge<T extends object = object>(...sources: T[]) {
       if (!(acc instanceof Array)) {
         acc = [];
       }
-      acc = [...new Set((acc as T[]).concat(...sources))];
-    } else if (source instanceof Object) {
+      acc = [...new Set((source).concat(...acc as T[]))];
+    } else if (shouldMerge(source)) {
       for (let [key, value] of Object.entries(source)) {
-        if (value instanceof Object && key in acc) {
+        if (shouldMerge(value) && key in acc) {
           value = deepMerge(acc[key], value);
         }
         acc = {

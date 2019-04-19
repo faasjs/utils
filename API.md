@@ -10,7 +10,12 @@
 
 <dl>
 <dt><a href="#deepMerge">deepMerge(...sources)</a></dt>
-<dd><p>合并 Object，若有数组形式的属性，也被自动合并</p>
+<dd><p>注意事项：</p>
+<ul>
+<li>合并时会复制对象，不会修改原对象</li>
+<li>合并顺序是后面的覆盖前面的</li>
+<li>若有数组形式的属性，数组里的内容将被去重合并</li>
+</ul>
 </dd>
 <dt><a href="#request">request(url, [options])</a> ⇒ <code>promise</code></dt>
 <dd><p>发起网络请求</p>
@@ -119,7 +124,10 @@
 <a name="deepMerge"></a>
 
 ## deepMerge(...sources)
-合并 Object，若有数组形式的属性，也被自动合并
+注意事项：
+* 合并时会复制对象，不会修改原对象
+* 合并顺序是后面的覆盖前面的
+* 若有数组形式的属性，数组里的内容将被去重合并
 
 **Kind**: global function  
 
