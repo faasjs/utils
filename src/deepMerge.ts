@@ -12,7 +12,7 @@ const shouldMerge = function (item: any) {
  * * 若有数组形式的属性，数组里的内容将被去重合并
  * @param sources [...any] 合并对象
  */
-export default function deepMerge<T extends object = object>(...sources: T[]) {
+export default function deepMerge<T extends object = object> (...sources: T[]) {
   let acc = Object.create(null);
   for (const source of sources) {
     if (source instanceof Array) {
@@ -23,7 +23,7 @@ export default function deepMerge<T extends object = object>(...sources: T[]) {
     } else if (shouldMerge(source)) {
       for (let [key, value] of Object.entries(source)) {
         if (shouldMerge(value) && key in acc) {
-          value = deepMerge(acc[key], value);
+          value = deepMerge(acc[key as string], value);
         }
         acc = {
           ...acc,

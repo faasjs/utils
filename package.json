@@ -1,34 +1,58 @@
 {
   "name": "@faasjs/utils",
-  "version": "0.0.0-alpha.2",
+  "version": "0.0.0-alpha.3",
   "license": "MIT",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
-    "lint": "tslint -p tsconfig.json --fix",
-    "build": "tsc",
+    "lint": "eslint --ext .ts --fix src",
+    "build": "rm -rf ./lib && tsc",
     "test": "jest --expand",
     "doc": "jsdoc2md --files ./lib/*.js > ./API.md",
     "ci": "yarn lint && yarn test",
-    "commit": "yarn ci && rm -rf ./lib && yarn build && yarn doc"
+    "commit": "yarn ci && yarn build && yarn doc"
   },
   "files": [
     "lib"
   ],
+  "dependencies": {
+    "@faasjs/logger": "0.0.0-alpha.0",
+    "@faasjs/request": "0.0.0-alpha.0"
+  },
   "devDependencies": {
     "@babel/core": "*",
     "@babel/preset-env": "*",
     "@babel/preset-typescript": "*",
+    "@faasjs/eslint-config-recommended": "0.0.0-alpha.1",
     "@types/debug": "*",
     "@types/jest": "*",
     "@types/node": "*",
     "babel-jest": "*",
     "jest": "*",
     "jsdoc-babel": "*",
-    "jsdoc-to-markdown": "*",
-    "tslint": "*",
-    "typescript": "*"
+    "jsdoc-to-markdown": "*"
   },
+  "babel": {
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "targets": {
+            "node": "8"
+          }
+        }
+      ],
+      "@babel/preset-typescript"
+    ]
+  },
+  "eslintConfig": {
+    "extends": [
+      "@faasjs/recommended"
+    ]
+  },
+  "eslintIgnore": [
+    "*.test.ts"
+  ],
   "jest": {
     "collectCoverage": true,
     "testPathIgnorePatterns": [
